@@ -151,5 +151,6 @@ def input2data(predictor_path, faces_folder_path):
 
         # we only proccess first detected face in the image
         break
-    return R_img, L_img, R_feature_point_layer, L_feature_point_layer
+   
+    return R_Xcen, R_Ycen, R_width, R_height, L_Xcen, L_Ycen, L_width, L_height, R_img, L_img, R_feature_point_layer, L_feature_point_layer
 
