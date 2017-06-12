@@ -35,11 +35,11 @@ if(!empty($_POST['submit']) && !empty($_FILES['image']) && $_FILES['image']['err
     if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile)) {
 
        $abs_uploadfile = __DIR__ . $uploadfile;
-       $output = get_python_result($abs_uploadfile);
+       $py_output = get_python_result($abs_uploadfile);
 
        save_local_file($uploadfile);
 
-       db_save($uploadfile); 
+       #db_save($uploadfile); 
        
     } else {
         die("Image upload failed!");
@@ -53,8 +53,18 @@ if(!empty($_POST['submit']) && !empty($_FILES['image']) && $_FILES['image']['err
   <title>Upload Page</title>
 </head>
 <body>
+<?php
+if(isset($py_output) and $py_output){
+list($tmp, $path) = explode(GAZE_PYTHON_OUTPUT_FOLDER, $py_output);
+?>
+<video width="320" height="240" controls>
+  <source src="<?php echo WEB_URL . GAZE_PYTHON_OUTPUT_FOLDER . $py_output?>" type="video/mp4">
+Your browser does not support the video tag with MP4.
+</video>
+<?php }else{ ?>
 <h1>Please upload image:</h1>
 <form method="post" enctype="multipart/form-data">
 <input name="image" type="file" />
 <input name="submit" type="submit" value="Upload" />
 </form>
+<?php } ?>
