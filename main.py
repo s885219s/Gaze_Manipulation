@@ -18,9 +18,8 @@ IMAGE_PATH_ARGUMENT = 'image_path='
 ARG1 = sys.argv[1]
 img_path = ARG1[ARG1.find(IMAGE_PATH_ARGUMENT)+len(IMAGE_PATH_ARGUMENT):]
 app_root = os.path.dirname(img_path)
-dataImage_path = os.path.join(app_root, 'images/')
+dataImage_path = os.path.join(app_root, 'pyoutput/')
 userImage_path = os.path.join(dataImage_path, date_string+'_'+path_random+'/')
-# print(target)
 if not os.path.isdir(dataImage_path):
     os.mkdir(dataImage_path)
 os.mkdir(userImage_path)

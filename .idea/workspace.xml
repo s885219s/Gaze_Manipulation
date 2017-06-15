@@ -2,47 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="854a6514-8eaa-489f-8806-d674833dc6f1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/loopImages.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Best_weight_cfw_lcm_v4.h5" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_L1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_L2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_L3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_L4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_L5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_L6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_L7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_L8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_L9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_R1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_R2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_R3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_R4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_R5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_R6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_R7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_R8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eye_R9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/frame-1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/frame-2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/frame-3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/frame-4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/frame-5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/frame-6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/frame-7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/frame-8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/frame-9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/output.mp4" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ten.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test_load_model.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test_model_cfw.h5" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.ipynb_checkpoints/test_load_model-checkpoint.ipynb" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/test_load_model-checkpoint.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/load_dataset.py" afterPath="$PROJECT_DIR$/load_dataset.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models.py" afterPath="$PROJECT_DIR$/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/transformation.py" afterPath="$PROJECT_DIR$/transformation.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -60,8 +21,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1386">
-              <caret line="79" column="10" lean-forward="false" selection-start-line="79" selection-start-column="10" selection-end-line="79" selection-end-column="10" />
+            <state relative-caret-position="231">
+              <caret line="78" column="10" lean-forward="true" selection-start-line="78" selection-start-column="10" selection-end-line="78" selection-end-column="10" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -72,8 +33,8 @@
       <file leaf-file-name="loopImages.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/loopImages.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1932">
-              <caret line="95" column="38" lean-forward="false" selection-start-line="95" selection-start-column="38" selection-end-line="95" selection-end-column="38" />
+            <state relative-caret-position="378">
+              <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -134,8 +95,8 @@
         <option value="$PROJECT_DIR$/../model_stable/main.py" />
         <option value="$PROJECT_DIR$/../model2/load_model.ipynb" />
         <option value="$PROJECT_DIR$/input2data.py" />
-        <option value="$PROJECT_DIR$/loopImages.py" />
         <option value="$PROJECT_DIR$/load_dataset.py" />
+        <option value="$PROJECT_DIR$/loopImages.py" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -361,11 +322,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1932" height="1212" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09391676" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3293247" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3293247" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297561" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -648,16 +610,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/loopImages.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1932">
-          <caret line="95" column="38" lean-forward="false" selection-start-line="95" selection-start-column="38" selection-end-line="95" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/load_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
@@ -666,10 +618,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/loopImages.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1386">
-          <caret line="79" column="10" lean-forward="false" selection-start-line="79" selection-start-column="10" selection-end-line="79" selection-end-column="10" />
+        <state relative-caret-position="231">
+          <caret line="78" column="10" lean-forward="true" selection-start-line="78" selection-start-column="10" selection-end-line="78" selection-end-column="10" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
