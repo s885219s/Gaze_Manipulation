@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="854a6514-8eaa-489f-8806-d674833dc6f1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyoutput/20170615_154206_0676/output.mp4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyoutput/20170615_154256_1249/output.mp4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyoutput/20170615_154327_9758/output.mp4" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyoutput/20170615_154415_6204/output.mp4" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/load_dataset.py" afterPath="$PROJECT_DIR$/load_dataset.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="231">
-              <caret line="78" column="10" lean-forward="true" selection-start-line="78" selection-start-column="10" selection-end-line="78" selection-end-column="10" />
+              <caret line="78" column="10" lean-forward="false" selection-start-line="78" selection-start-column="10" selection-end-line="78" selection-end-column="10" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -33,7 +36,7 @@
       <file leaf-file-name="loopImages.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/loopImages.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
+            <state relative-caret-position="-1134">
               <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -45,8 +48,8 @@
       <file leaf-file-name="load_dataset.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/load_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="77" column="16" lean-forward="false" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="25" />
+            <state relative-caret-position="1428">
+              <caret line="76" column="4" lean-forward="false" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -95,9 +98,9 @@
         <option value="$PROJECT_DIR$/../model_stable/main.py" />
         <option value="$PROJECT_DIR$/../model2/load_model.ipynb" />
         <option value="$PROJECT_DIR$/input2data.py" />
-        <option value="$PROJECT_DIR$/load_dataset.py" />
         <option value="$PROJECT_DIR$/loopImages.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/load_dataset.py" />
       </list>
     </option>
   </component>
@@ -612,15 +615,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/load_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="77" column="16" lean-forward="false" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="25" />
+        <state relative-caret-position="1428">
+          <caret line="76" column="4" lean-forward="false" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/loopImages.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
+        <state relative-caret-position="-1134">
           <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -631,7 +634,7 @@
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
-          <caret line="78" column="10" lean-forward="true" selection-start-line="78" selection-start-column="10" selection-end-line="78" selection-end-column="10" />
+          <caret line="78" column="10" lean-forward="false" selection-start-line="78" selection-start-column="10" selection-end-line="78" selection-end-column="10" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
