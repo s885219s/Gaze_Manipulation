@@ -80,7 +80,7 @@ def meshgrid(height, width):
     indices_grid = tf.concat([x_coordinates, y_coordinates], 0)
     return indices_grid
 
-def apply_transform(flows, input_shape):
+def apply_transformation(flows, input_shape):
     batch_size = tf.shape(input_shape)[0]
     height = tf.shape(input_shape)[1]
     width = tf.shape(input_shape)[2]
@@ -125,13 +125,13 @@ def trans_angle(inputs, height, width):
     batch_size = tf.shape(inputs)[0]
     feature_dims = tf.shape(inputs)[1]
     data = tf.transpose(inputs, perm=[1,0]) 
-    data = tf.tile(data,tf.constant([width*height,1]))
+    data = tf.tile(data,tf.constant([height*width,1]))
     data = tf.transpose(data, perm=[1,0]) 
-    data = tf.reshape(data, [batch_size,height,width,feature_dims])
-    return data
+    ret = tf.reshape(data, [batch_size,height,width,feature_dims])
+    return ret
 
 def spatial_softmax_across_pixels(inputs):
-    inputs = tf.cast(inputs, dtype = 'float32')
+    inputs = tf.cast(inputs, dtype = tf.float32)
     batch_size = tf.shape(inputs)[0]
     height = tf.shape(inputs)[1]
     width = tf.shape(inputs)[2]
@@ -142,7 +142,7 @@ def spatial_softmax_across_pixels(inputs):
     return ret
 
 def spatial_softmax_across_channels(inputs):
-    inputs = tf.cast(inputs, dtype = 'float32')
+    inputs = tf.cast(inputs, dtype = tf.float32)
     batch_size = tf.shape(inputs)[0]
     height = tf.shape(inputs)[1]
     width = tf.shape(inputs)[2]
@@ -153,40 +153,14 @@ def spatial_softmax_across_channels(inputs):
     return ret
 
 def apply_light_weight(batch_img, light_weight):
-    batch_size = tf.shape(batch_img)[0]
-    height = tf.shape(batch_img)[1]
-    width = tf.shape(batch_img)[2]
-    channels = tf.shape(batch_img)[3]
+    # perfrom softmax
+    light_weight = spatial_softmax_across_channels(light_weight)
     
-    light_batch_size = tf.shape(light_weight)[0]
-    light_height = tf.shape(light_weight)[1]
-    light_width = tf.shape(light_weight)[2]
-    light_channels = tf.shape(light_weight)[3]
+    img_wgts, pal_wgts = tf.expand_dims(light_weight[...,0],3), tf.expand_dims(light_weight[...,1],3)
+    img_wgts = tf.concat([img_wgts, img_wgts, img_wgts], axis = 3)
+    pal_wgts = tf.concat([pal_wgts, pal_wgts, pal_wgts], axis = 3)
     
-    batch_size = tf.cast(batch_size, dtype = 'int32')
-    height = tf.cast(height, dtype = 'int32')
-    width = tf.cast(width, dtype = 'int32')
+    palette = tf.ones(tf.shape(batch_img), dtype = tf.float32)
     
-    palette = tf.constant([[0.95,0.95,0.95]], dtype = 'float32')
-    palette = tf.tile(palette, tf.stack([1, batch_size*width*height]))
-    # flatten
-    batch_img = tf.reshape(batch_img, [-1])
-    batch_img = tf.expand_dims(batch_img,0)
-    # concat palette and batch_img
-    img_input = tf.concat([batch_img, palette],axis = 0)
-    # reshape weights
-    split0, split1 = tf.split(light_weight,[1,1], axis = 3)
-    
-    split0 = tf.tile(split0,tf.stack([1,1,1,3]))
-    split0 = tf.reshape(split0, [-1])
-    split0 = tf.expand_dims(split0,0)
-
-    split1 = tf.tile(split1,tf.stack([1,1,1,3]))
-    split1 = tf.reshape(split1, [-1])
-    split1 = tf.expand_dims(split1,0)
-    per_pixel_weights = tf.concat([split0, split1],axis = 0)
-    
-    ret = tf.multiply(img_input, per_pixel_weights)
-    ret = tf.reduce_sum(ret,axis = 0)
-    ret = tf.reshape(ret, [batch_size,height,width,channels])
+    ret = tf.add(tf.multiply(batch_img, img_wgts), tf.multiply(palette, pal_wgts))
     return ret

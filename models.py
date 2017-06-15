@@ -172,4 +172,5 @@ def create_cfw_lsm_model(input_img, input_agl, input_ef, conf):
 
     res_img = Lambda(lambda x: apply_light_weight(batch_img = cfw_img, light_weight = x),output_shape=(conf.height, conf.width, conf.channel), name = 'res_img')(per_pixel_weight)
     model = Model(inputs = [input_ef, input_agl, input_img], outputs=[res_img])
+    # graph = tf.get_default_graph()
     return model

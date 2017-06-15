@@ -90,10 +90,10 @@ def input2data(predictor_path, faces_folder_path):
             left_eye_coord_global[i][1] = shape.part(left_eye_index[i]).y
         grace_width = 5
         grace_height = 4
-        R_xmin = min(right_eye_coord_global[0:feature_point_num,0])
-        R_xmax = max(right_eye_coord_global[0:feature_point_num,0])
-        R_ymin = min(right_eye_coord_global[0:feature_point_num,1])
-        R_ymax = max(right_eye_coord_global[0:feature_point_num,1])
+        R_xmin = right_eye_coord_global[0,0]
+        R_xmax = right_eye_coord_global[3,0]
+        R_ymin = right_eye_coord_global[0,1]
+        R_ymax = right_eye_coord_global[3,1]
         #CR = int(math.sqrt((R_xmax-R_xmin)*(R_ymax-R_ymin))+.5)
         #R_CRd5= int(grace_ratio*CR)
         #R_CRd4= int(grace_ratio*CR*0.8 + 0.5)
@@ -112,10 +112,10 @@ def input2data(predictor_path, faces_folder_path):
             right_eye_coord_local[i,1] = int( (right_eye_coord_global[i,1] - R_new_origin_y) * 40 / (2 * R_height) )
             #text_file.write("%d,%d\n" % (right_eye_coord_local[i,0], right_eye_coord_local[i,1]))
         #text_file.close()
-        L_xmin = min(left_eye_coord_global[0:feature_point_num,0])
-        L_xmax = max(left_eye_coord_global[0:feature_point_num,0])
-        L_ymin = min(left_eye_coord_global[0:feature_point_num,1])
-        L_ymax = max(left_eye_coord_global[0:feature_point_num,1])
+        L_xmin = left_eye_coord_global[3,0]
+        L_xmax = left_eye_coord_global[0,0]
+        L_ymin = left_eye_coord_global[3,1]
+        L_ymax = left_eye_coord_global[0,1]
         #CR = int(math.sqrt((R_xmax-R_xmin)*(R_ymax-R_ymin))+.5)
         #L_CRd5 = int(grace_ratio*CR)
         #L_CRd4 = int(grace_ratio*CR*0.8 + 0.5)
@@ -151,6 +151,5 @@ def input2data(predictor_path, faces_folder_path):
 
         # we only proccess first detected face in the image
         break
-   
     return R_Xcen, R_Ycen, R_width, R_height, L_Xcen, L_Ycen, L_width, L_height, R_img, L_img, R_feature_point_layer, L_feature_point_layer
 
