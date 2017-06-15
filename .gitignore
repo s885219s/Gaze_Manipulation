@@ -1,2 +1,10 @@
 config.for.dev.php
 _record.php
+
+*.pyc
+__pycache__
+.idea
+pyoutput
+bg.jpg
+2.png
+*.ipynb
