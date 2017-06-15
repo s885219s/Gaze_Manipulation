@@ -1,11 +1,11 @@
 <?php
 define('_DIR_', __DIR__.'/');
 define('CALL_PY_FILE', '_call_me_by_php---lasdF8wer2aLsdkfj.py');
-define('GAZE_PYTHON_OUTPUT_FOLDER', 'gaze_output');
+define('GAZE_PYTHON_OUTPUT_FOLDER', 'pyoutput');
 define('WEB_URL', '/_sites/gaze_manipulation/');
 
-function get_python_result($uploaded_image_path){
-  $cmd = 'python ' . _DIR_ . CALL_PY_FILE . ' image_path='.$uploaded_image_path;
+function get_python_result($uploaded_image_path, $direction){
+  $cmd = 'python ' . _DIR_ . CALL_PY_FILE . ' image_path='.$uploaded_image_path . ' direction='.$direction;
   $command = escapeshellcmd($cmd);
   $output = shell_exec($command);
   return $output;
