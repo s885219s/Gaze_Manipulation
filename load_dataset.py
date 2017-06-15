@@ -70,10 +70,10 @@ def input2data(predictor_path, faces_folder_path):
     grace_ratio = 1.5
     feature_point_num = 7
     #for f in glob.glob(os.path.join(faces_folder_path, "*.jpg")):
-    print("Processing file: {}".format(faces_folder_path))
+    # print("Processing file: {}".format(faces_folder_path))
     img = io.imread(faces_folder_path)
     dets = detector(img, 1)
-    print("Number of faces detected: {}".format(len(dets)))
+    # print("Number of faces detected: {}".format(len(dets)))
     for k, d in enumerate(dets):
         shape = predictor(img, d)
         right_eye_coord_global = np.zeros((feature_point_num,2))
