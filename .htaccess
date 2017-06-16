@@ -1,3 +1,14 @@
+RedirectMatch 404 \.git
+RedirectMatch 404 \.gitignore
+RedirectMatch 404 loopImages.py
+RedirectMatch 404 _README_asdkfasjdlfkjasfoa.txt
+RedirectMatch 404 transformation.py
+RedirectMatch 404 models.py
+RedirectMatch 404 load_dataset.py
+RedirectMatch 404 DeepWarp.py
+RedirectMatch 404 _call_me_by_php---lasdF8wer2aLsdkfj.py
+
+
 <Files ~ ".gitignore$">
 Order allow,deny
 Deny from all
