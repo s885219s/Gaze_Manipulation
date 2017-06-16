@@ -23,6 +23,8 @@ def images2mp4(userImage_path,img_path,R_Xcen,R_Ycen,R_width,R_height,L_Xcen,L_Y
             eyeR.append(f)
         elif f.startswith('eye_L'):
             eyeL.append(f)
+    eyeR.sort()
+    eyeL.sort()
 
     with Image(filename=img_path) as bg:
         bg.format = 'png'

@@ -39,9 +39,11 @@ R_Xcen, R_Ycen, R_width, R_height, L_Xcen, L_Ycen, L_width, L_height, R_img, L_i
 decoded_imgs_L = []
 decoded_imgs_R = []
 
+# direction = input("hello")
 DIRECTION_ARGUMENT = 'direction='
 ARG2 = sys.argv[2]
 direction = ARG2[ARG2.find(DIRECTION_ARGUMENT)+len(DIRECTION_ARGUMENT):]
+
 if direction.startswith('sc') or direction.startswith('SC') or direction.startswith('Sc') :
     for i in range(9):
         x_train_R = ex_dim(R_img)
