@@ -1,13 +1,42 @@
 <?php
+#http://www.doubleservice.com/2011/01/php-application-env-setting/
+
+set_time_limit(0);
+/*
+ini_set('error_reporting', E_ALL | E_STRICT);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+*/
+
 define('_DIR_', __DIR__.'/');
-define('CALL_PY_FILE', '_call_me_by_php---lasdF8wer2aLsdkfj.py');
+#define('CALL_PY_FILE', '_call_me_by_php---lasdF8wer2aLsdkfj.py');
+define('CALL_PY_FILE', 'main.py');
 define('GAZE_PYTHON_OUTPUT_FOLDER', 'pyoutput');
-define('WEB_URL', '/_sites/gaze_manipulation/');
+define('WEB_URL', '/gaze_manipulation/');
+define('IS_DEVELOPER', $_SERVER['REMOTE_ADDR']=='140.109.22.127');
 
 function get_python_result($uploaded_image_path, $direction){
-  $cmd = 'python ' . _DIR_ . CALL_PY_FILE . ' image_path='.$uploaded_image_path . ' direction='.$direction;
-  $command = escapeshellcmd($cmd);
-  $output = shell_exec($command);
+  $DEBUG=0 && IS_DEVELOPER;
+  # source..
+  /*
+  $cmd_prepare = 'source /home/uchen/py3env/bin/activate'; 
+  if($DEBUG){
+    echo$cmd_prepare."<br>";
+  }else{
+  $command = escapeshellcmd($cmd_prepare);
+  shell_exec($command);
+  }*/
+
+  # execute...
+  $cmd = 'source /home/uchen/py3env/bin/activate && /home/uchen/py3env/bin/python3.4 ' . _DIR_ . CALL_PY_FILE . ' image_path='.$uploaded_image_path . ' direction='.$direction;
+  #debug
+  if($DEBUG){
+    echo$cmd."<br>";
+    die('----------debug--------------');
+  }else{
+  file_put_contents(_DIR_.'_pycmd.log.php', $cmd."\n", FILE_APPEND | LOCK_EX);
+  $output = exec($cmd);
+  }
   return $output;
 }
 
