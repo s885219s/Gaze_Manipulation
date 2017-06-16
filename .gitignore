@@ -10,3 +10,6 @@ bg.jpg
 *.ipynb
 
 *.zip
+_pycmd.log.php
+mp4.html
+*.swp
