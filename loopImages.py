@@ -76,6 +76,7 @@ def images2mp4(userImage_path,img_path,R_Xcen,R_Ycen,R_width,R_height,L_Xcen,L_Y
         if f.startswith('frame'):
             frame = skvideo.io.vread(userImage_path+f)
             resizeImagesMp4.append(frame)
+    resizeImagesMp4.sort()
 
     reverseMp4 = list(reversed(resizeImagesMp4))
     del reverseMp4[0]
