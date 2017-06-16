@@ -9,8 +9,8 @@ ini_set('display_startup_errors', 1);
 */
 
 define('_DIR_', __DIR__.'/');
-#define('CALL_PY_FILE', '_call_me_by_php---lasdF8wer2aLsdkfj.py');
-define('CALL_PY_FILE', 'main.py');
+define('CALL_PY_FILE', '_call_me_by_php---lasdF8wer2aLsdkfj.py');
+#define('CALL_PY_FILE', 'main.py');
 define('GAZE_PYTHON_OUTPUT_FOLDER', 'pyoutput');
 define('WEB_URL', '/gaze_manipulation/');
 define('IS_DEVELOPER', $_SERVER['REMOTE_ADDR']=='140.109.22.127');
