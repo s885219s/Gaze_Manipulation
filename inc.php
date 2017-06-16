@@ -34,8 +34,9 @@ function get_python_result($uploaded_image_path, $direction){
     echo$cmd."<br>";
     die('----------debug--------------');
   }else{
-  file_put_contents(_DIR_.'_pycmd.log.php', $cmd."\n", FILE_APPEND | LOCK_EX);
-  $output = exec($cmd);
+    file_put_contents(_DIR_.'_pycmd.log.php', $cmd."\n", FILE_APPEND | LOCK_EX);
+    $output = exec($cmd);
+    file_put_contents(_DIR_.'_pycmdoutput.log.php', $output."\n\n\n", FILE_APPEND | LOCK_EX);
   }
   return $output;
 }
