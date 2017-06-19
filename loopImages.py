@@ -32,12 +32,14 @@ def images2mp4(userImage_path,img_path,R_Xcen,R_Ycen,R_width,R_height,L_Xcen,L_Y
             # print(count,eye[0],eye[1])
             with Image(filename=userImage_path+str(eye[0])) as imgR:
                 reR = imgR.clone()
-                reR.resize(96, 76)
-                bg.composite(reR, left=R_Xcen - R_width, top=R_Ycen - R_height)
+                reR.resize(R_width*2, R_height*2)
+                reR.crop(5, 4, R_width * 2 - 5, R_height * 2 - 4)
+                bg.composite(reR, left=R_Xcen -  R_width+ 5, top=R_Ycen - R_height+4)
             with Image(filename=userImage_path+str(eye[1])) as imgL:
                 reL = imgL.clone()
-                reL.resize(96, 76)
-                bg.composite(reL, left=L_Xcen - L_width, top=L_Ycen - L_height)
+                reL.resize(L_width*2, L_height*2)
+                reL.crop(5, 4, L_width * 2 - 5, L_height * 2 - 4)
+                bg.composite(reL, left=L_Xcen - L_width + 5, top=L_Ycen - L_height+4)
             resGif = bg.clone()
             resGif.resize(600, 400)
             resGif.save(filename=userImage_path+'frame'+str(count).zfill(2)+'.png')
