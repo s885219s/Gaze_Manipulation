@@ -50,7 +50,7 @@ if direction.startswith('sc') or direction.startswith('SC') or direction.startsw
         x_train_L = ex_dim(L_img)
         feature_point_R = ex_dim(R_feature_point_layer)
         feature_point_L = ex_dim(L_feature_point_layer)
-        angle_dif = np.array([[0, 4 * i - 30]])
+        angle_dif = np.array([[4 * i - 30, 0]])
 
         de_img_r = model.predict([feature_point_R / 1.0, angle_dif / 1.0, x_train_R / 1.0])
         decoded_imgs_R.append(de_img_r)
