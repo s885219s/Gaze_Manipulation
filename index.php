@@ -61,6 +61,8 @@ if(!empty($_POST['dir']) && !empty($_FILES['image']) && $_FILES['image']['error'
 <script src=vendors/bootstrap-3.3.7/js/bootstrap.min.js></script>
 <script src=vendors/bootstrap-3.3.7/js/bootstrap-filestyle.min.js></script>
 <style>
+ul,ol{padding:0}
+li{list-style:none}
 .glyphicon.spinning{
 animation: spin 1s infinite linear;
 -webkit-animation: spin2 1s infinite linear;
@@ -73,13 +75,17 @@ animation: spin 1s infinite linear;
     from { -webkit-transform: rotate(0deg); }
     to { -webkit-transform: rotate(360deg); }
 }
+#typebox button{text-transform:capitalize}
+@media screen and (max-width: 450px) {
+  h1{font-size:24px}
+}
 </style>
 </head>
 <body>
 <div class=container>
 <div class=row>
 <div class="col-lg-8 col-lg-offset-2">
-<h1 class="page-header">Gazing Demo Page</h1>
+<h1 class="page-header">Gaze Manipulation Demo</h1>
 <ul>
 <li>Supported image extensions: <code>.png</code>, <code>.jpg</code>, <code>.jpeg</code></li>
 <?php /*
@@ -89,14 +95,17 @@ animation: spin 1s infinite linear;
 */?>
 </ul>
 <form id="submit-form" class="form-inline" method="post" enctype="multipart/form-data">
-<div class="form-group">
+<div class="form-group" style="margin:0;padding:0">
 <div class="input-group">
 <input type="file" name="image" class="filestyle" data-icon="false" data-buttonBefore="true">
 </div>
-</div> &nbsp;
+</div>
+<div style="border:1px solid #ccc;padding:12px;margin:12px 0 0" id=typebox>
+<div style="font-weight:bold;margin:0 0 10px">Types</div>
 <?php foreach($ARRAY_VALID_DIR as $k=>$v){ ?>
-<button class="btn btn-default btn-dir" type="submit" name="dir" value="<?php echo$v?>">Let's <?php echo$v?>!</button>
+<button class="btn btn-default btn-dir" type="submit" name="dir" value="<?php echo$v?>"><?php echo $v=='mouse' ? 'cursor' :$v?></button>
 <?php } ?>
+</div>
 </form>
 
 <div style=height:16px></div>
