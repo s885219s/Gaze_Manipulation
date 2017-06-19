@@ -45,12 +45,12 @@ ARG2 = sys.argv[2]
 direction = ARG2[ARG2.find(DIRECTION_ARGUMENT)+len(DIRECTION_ARGUMENT):]
 
 if direction.startswith('sc') or direction.startswith('SC') or direction.startswith('Sc') :
-    for i in range(9):
+    for i in range(15):
         x_train_R = ex_dim(R_img)
         x_train_L = ex_dim(L_img)
         feature_point_R = ex_dim(R_feature_point_layer)
         feature_point_L = ex_dim(L_feature_point_layer)
-        angle_dif = np.array([[i * 10 - 40, 0]])
+        angle_dif = np.array([[0, 4 * i - 30]])
 
         de_img_r = model.predict([feature_point_R / 1.0, angle_dif / 1.0, x_train_R / 1.0])
         decoded_imgs_R.append(de_img_r)
@@ -61,12 +61,12 @@ if direction.startswith('sc') or direction.startswith('SC') or direction.startsw
         # decoded_img_l = model.predict([feature_point_L, angle_dif, x_train_L], batch_size=128, verbose=1)
         # decoded_imgs_L.append(decoded_img_l)
 elif direction.startswith('sh') or direction.startswith('SH') or direction.startswith('Sh') :
-    for i in range(9):
+    for i in range(15):
         x_train_R = ex_dim(R_img)
         x_train_L = ex_dim(L_img)
         feature_point_R = ex_dim(R_feature_point_layer)
         feature_point_L = ex_dim(L_feature_point_layer)
-        angle_dif = np.array([[ 0, i * 10 - 40]])
+        angle_dif = np.array([[0, 4 * i - 30]])
 
         de_img_r = model.predict([feature_point_R / 1.0, angle_dif / 1.0, x_train_R / 1.0])
         decoded_imgs_R.append(de_img_r)
@@ -82,12 +82,12 @@ elif direction.startswith('mo') or direction.startswith('MO') or direction.start
 
 for count, img_r in enumerate(decoded_imgs_R, 1):
     img_r = np.uint8(img_r[0] * 255)
-    imgname = 'eye_R' + str(count) + '.png'
+    imgname = 'eyeR_' + str(count).zfill(2) + '.png'
     savename = os.path.join(userImage_path,imgname)
     skvideo.io.vwrite(savename, img_r)
 for count, img_l in enumerate(decoded_imgs_L, 1):
     img_l = np.uint8(img_l[0] * 255)
-    imgname = 'eye_L' + str(count) + '.png'
+    imgname = 'eyeL_' + str(count).zfill(2) + '.png'
     savename = os.path.join(userImage_path, imgname)
     skvideo.io.vwrite(savename, img_l)
 

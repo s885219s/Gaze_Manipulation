@@ -19,9 +19,9 @@ def images2mp4(userImage_path,img_path,R_Xcen,R_Ycen,R_width,R_height,L_Xcen,L_Y
     eyeL = []
 
     for f in os.listdir(userImage_path):
-        if f.startswith('eye_R'):
+        if f.startswith('eyeR_'):
             eyeR.append(f)
-        elif f.startswith('eye_L'):
+        elif f.startswith('eyeL_'):
             eyeL.append(f)
     eyeR.sort()
     eyeL.sort()
@@ -40,7 +40,7 @@ def images2mp4(userImage_path,img_path,R_Xcen,R_Ycen,R_width,R_height,L_Xcen,L_Y
                 bg.composite(reL, left=L_Xcen - L_width, top=L_Ycen - L_height)
             resGif = bg.clone()
             resGif.resize(600, 400)
-            resGif.save(filename=userImage_path+'frame'+str(count)+'.png')
+            resGif.save(filename=userImage_path+'frame'+str(count).zfill(2)+'.png')
             # resizeImagesGif.append(resGif)
 
             # convert to opencv
@@ -74,8 +74,7 @@ def images2mp4(userImage_path,img_path,R_Xcen,R_Ycen,R_width,R_height,L_Xcen,L_Y
         #     gif.save(filename=outputGif)
     for f in os.listdir(userImage_path):
         if f.startswith('frame'):
-            frame = skvideo.io.vread(userImage_path+f)
-            resizeImagesMp4.append(frame)
+            resizeImagesMp4.append(f)
     resizeImagesMp4.sort()
 
     reverseMp4 = list(reversed(resizeImagesMp4))
@@ -85,14 +84,15 @@ def images2mp4(userImage_path,img_path,R_Xcen,R_Ycen,R_width,R_height,L_Xcen,L_Y
 
     writer = skvideo.io.FFmpegWriter(outputMp4,
                                      inputdict={
-                                         '-r': '5'
+                                         '-r': '24'
                                      },
                                      outputdict={
                                          '-vcodec': 'libx264',
                                          '-b': '30000000'
                                      })
     for i in resizeImagesMp4:
-        writer.writeFrame(i)
+        frame = skvideo.io.vread(userImage_path + i)
+        writer.writeFrame(frame)
     writer.close()
 
     for f in os.listdir(userImage_path):
