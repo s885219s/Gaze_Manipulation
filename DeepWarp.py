@@ -31,19 +31,19 @@ def create_model(input_img, input_agl, input_ef, conf, cfw_only = False):
 
     locnet = Lambda(lambda image: tf.image.resize_images(image, (int(conf.height/2+0.5), int(conf.width/2 + 0.5))))(input_datas)
 
-    locnet = Conv2D(16, (5, 5),padding='same', use_bias=False)(locnet)
+    locnet = Conv2D(16, (5, 5),padding='same')(locnet)
     locnet = BatchNormalization()(locnet)
     locnet = Activation('relu')(locnet)
 
-    locnet = Conv2D(32, (3, 3),padding='same', use_bias=False)(locnet)
+    locnet = Conv2D(32, (3, 3),padding='same')(locnet)
     locnet = BatchNormalization()(locnet)
     locnet = Activation('relu')(locnet)
 
-    locnet = Conv2D(32, (3, 3),padding='same', use_bias=False)(locnet)
+    locnet = Conv2D(32, (3, 3),padding='same')(locnet)
     locnet = BatchNormalization()(locnet)
     light_feature_1 = Activation('relu', name = 'light_feature_1')(locnet)
 
-    locnet = Conv2D(32, (1, 1),padding='same', use_bias=False)(light_feature_1)
+    locnet = Conv2D(32, (1, 1),padding='same')(light_feature_1)
     locnet = BatchNormalization()(locnet)
     locnet = Activation('relu')(locnet)
 
@@ -55,23 +55,23 @@ def create_model(input_img, input_agl, input_ef, conf, cfw_only = False):
     D_c_img = Lambda(lambda x: apply_transformation(flows = x[0], input_shape = x[1]),output_shape = (conf.height, conf.width, conf.channel), name = 'D_c_img')([D_c_flow, input_img])
 
     '''Fine warping'''
-    D_fin_input = concatenate([input_img, D_c_img, D_c_flow], axis = 3, name = 'D_fin_input')
+    D_fin_input = concatenate([input_datas, D_c_img, D_c_flow], axis = 3, name = 'D_fin_input')
 
-    locnet2 = Conv2D(16, (5, 5),padding='same', use_bias=False)(D_fin_input)
+    locnet2 = Conv2D(16, (5, 5),padding='same')(D_fin_input)
     locnet2 = BatchNormalization()(locnet2)
     locnet2 = Activation('relu')(locnet2)
     # locnet2 = LeakyReLU(alpha=0.02)(locnet2)
     
-    locnet2 = Conv2D(32, (3, 3),padding='same', use_bias=False)(locnet2)
+    locnet2 = Conv2D(32, (3, 3),padding='same')(locnet2)
     locnet2 = BatchNormalization()(locnet2)
     locnet2 = Activation('relu')(locnet2)
 
-    locnet2 = Conv2D(32, (3, 3),padding='same', use_bias=False)(locnet2)
+    locnet2 = Conv2D(32, (3, 3),padding='same')(locnet2)
     locnet2 = BatchNormalization()(locnet2)
     light_feature_2 = Activation('relu', name = 'light_feature_2')(locnet2)
     # light_feature_2 = LeakyReLU(alpha=0.02, name = 'light_feature_2')(locnet2)
 
-    locnet2 = Conv2D(32, (1, 1),padding='same', use_bias=False)(light_feature_2)
+    locnet2 = Conv2D(32, (1, 1),padding='same')(light_feature_2)
     locnet2 = BatchNormalization()(locnet2)
     locnet2 = Activation('relu')(locnet2)
 
@@ -87,16 +87,16 @@ def create_model(input_img, input_agl, input_ef, conf, cfw_only = False):
         return model
     
     '''lcm'''
-    light_feature_1_res = Lambda(lambda image: tf.image.resize_images(image, size=(conf.height, conf.width), method=1),output_shape=(conf.height, conf.width, 32))(light_feature_1)
+    light_feature_1_res = Lambda(lambda image: tf.image.resize_images(image, size=(conf.height, conf.width)),output_shape=(conf.height, conf.width, 32))(light_feature_1)
 
     light_feature_input = concatenate([light_feature_1_res, light_feature_2], axis = 3, name = 'light_feature_input')
     
     # locnet3 = Conv2D(8, (1, 1),padding='same', use_bias=False)(light_feature_2)
-    locnet3 = Conv2D(8, (1, 1),padding='same', use_bias=False)(light_feature_input)
+    locnet3 = Conv2D(8, (1, 1),padding='same')(light_feature_input)
     locnet3 = BatchNormalization()(locnet3)
     locnet3 = Activation('relu')(locnet3)
 
-    locnet3 = Conv2D(8, (1, 1),padding='same', use_bias=False)(locnet3)
+    locnet3 = Conv2D(8, (1, 1),padding='same')(locnet3)
     locnet3 = BatchNormalization()(locnet3)
     locnet3 = Activation('relu')(locnet3)
 

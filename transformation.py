@@ -38,7 +38,7 @@ def interpolate(image, x, y, output_size):
     y0 = tf.clip_by_value(y0, zero, max_y)
     y1 = tf.clip_by_value(y1, zero, max_y)
 
-    flat_image_dimensions = width*height
+    flat_image_dimensions = height*width
     pixels_batch = tf.range(batch_size)*flat_image_dimensions
     flat_output_dimensions = output_height*output_width
     base = repeat(pixels_batch, flat_output_dimensions)
@@ -71,12 +71,12 @@ def interpolate(image, x, y, output_size):
                        area_d*pixel_values_d])
     return output
 
-def meshgrid(height, width):
-    x_linspace = tf.linspace(-1., 1., width)
+def meshgrid(height, width):    
     y_linspace = tf.linspace(-1., 1., height)
-    x_coordinates, y_coordinates = tf.meshgrid(x_linspace, y_linspace)
-    x_coordinates = tf.reshape(x_coordinates, [-1])
-    y_coordinates = tf.reshape(y_coordinates, [-1])
+    x_linspace = tf.linspace(-1., 1., width)
+    x_coordinates, y_coordinates = tf.meshgrid(x_linspace, y_linspace)    
+    y_coordinates = tf.expand_dims(tf.reshape(y_coordinates, [-1]),0)
+    x_coordinates = tf.expand_dims(tf.reshape(x_coordinates, [-1]),0)
     indices_grid = tf.concat([x_coordinates, y_coordinates], 0)
     return indices_grid
 
@@ -86,39 +86,21 @@ def apply_transformation(flows, input_shape):
     width = tf.shape(input_shape)[2]
     num_channels = tf.shape(input_shape)[3]
     output_size = (height, width)
+    flow_channels = tf.shape(flows)[3]
+ 
+    flows = tf.reshape(tf.transpose(flows, [0, 3, 1, 2]), [batch_size, flow_channels, height*width])
 
-    # affine_transformation = tf.reshape(affine_transformation, shape=(batch_size,2,3))
-    flows = tf.transpose(flows, [0, 3, 1, 2])
-    flows = tf.reshape(flows, shape=(batch_size,2,-1))
+    indices_grid = meshgrid(height, width)
 
-    flows = tf.cast(flows, 'float32')
-
-    width = tf.cast(width, dtype='float32')
-    height = tf.cast(height, dtype='float32')
-    output_height = output_size[0]
-    output_width = output_size[1]
-    indices_grid = meshgrid(output_height, output_width)
-
-    indices_grid = tf.tile(indices_grid, tf.stack([batch_size]))
-    # indices_grid = tf.reshape(indices_grid, (batch_size, 3, -1))
-    indices_grid = tf.reshape(indices_grid, (batch_size, 2, -1))
-
-    # transformed_grid = tf.matmul(affine_transformation, indices_grid)
     transformed_grid = tf.add(flows, indices_grid)
     x_s = tf.slice(transformed_grid, [0, 0, 0], [-1, 1, -1])
     y_s = tf.slice(transformed_grid, [0, 1, 0], [-1, 1, -1])
     x_s_flatten = tf.reshape(x_s, [-1])
     y_s_flatten = tf.reshape(y_s, [-1])
 
-    transformed_image = interpolate(input_shape,
-                                            x_s_flatten,
-                                            y_s_flatten,
-                                            output_size)
+    transformed_image = interpolate(input_shape, x_s_flatten, y_s_flatten, (height, width))
 
-    transformed_image = tf.reshape(transformed_image, shape=(batch_size,
-                                                            output_height,
-                                                            output_width,
-                                                            num_channels))
+    transformed_image = tf.reshape(transformed_image, [batch_size, height, width, num_channels])
     return transformed_image
 
 def trans_angle(inputs, height, width):
