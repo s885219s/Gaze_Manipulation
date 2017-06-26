@@ -1,6 +1,6 @@
 <?php
 require_once 'inc.php';
-$ARRAY_VALID_DIR = array('shift', 'scroll', 'mouse');
+$ARRAY_VALID_DIR = array('shift', 'scroll');#, 'mouse');
 #print_r($_POST); print_r($_FILES);
 
 if(!empty($_POST['dir']) && !empty($_FILES['image']) && $_FILES['image']['error'] == 0) {
