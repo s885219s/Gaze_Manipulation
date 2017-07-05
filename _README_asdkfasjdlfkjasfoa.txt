@@ -1,7 +1,7 @@
 # linux command line (for executing the python):
 
 ```
-source /home/uchen/py3env/bin/activate && /home/uchen/py3env/bin/python3.4 /var/www/gaze_manipulation/main.py image_path=/var/www/gaze_manipulation/uploads/1315787051.img direction=shift
+/usr/bin/python3 /opt/lampp/htdocs/gaze_manipulation/_call_me_by_php---lasdF8wer2aLsdkfj.py image_path=/opt/lampp/htdocs/gaze_manipulation/bg.jpg direction=shift
 ```
 (there are three directions: scoll,shift and mouse)
 
