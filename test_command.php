@@ -1,10 +1,10 @@
 <?php
-if($_SERVER['REMOTE_ADDR']!='140.109.22.127'){exit;}
+if($_SERVER['REMOTE_ADDR']!='140.109.22.22'){exit;}
 
 # http://eeepage.info/php-system-exec-passthru/
 
 #try system AND exec
-$a = system('source /home/uchen/py3env/bin/activate && /home/uchen/py3env/bin/python3.4 /var/www/gaze_manipulation/main.py image_path=/var/www/gaze_manipulation/uploads/1315787051.img direction=shift');
+$a = passthru('/usr/bin/python3 /opt/lampp/htdocs/gaze_manipulation/_call_me_by_php---lasdF8wer2aLsdkfj.py image_path=/opt/lampp/htdocs/gaze_manipulation/uploads/2030165644.img direction=scroll');
 echo'<hr>';
 print_r($a);
 

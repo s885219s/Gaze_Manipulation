@@ -13,10 +13,10 @@ define('CALL_PY_FILE', '_call_me_by_php---lasdF8wer2aLsdkfj.py');
 #define('CALL_PY_FILE', 'main.py');
 define('GAZE_PYTHON_OUTPUT_FOLDER', 'pyoutput');
 define('WEB_URL', '/gaze_manipulation/');
-define('IS_DEVELOPER', $_SERVER['REMOTE_ADDR']=='140.109.22.127');
+define('IS_DEVELOPER', $_SERVER['REMOTE_ADDR']=='140.109.22.127' || $_SERVER['REMOTE_ADDR']=='140.109.22.22');
 
 function get_python_result($uploaded_image_path, $direction){
-  $DEBUG=0 && IS_DEVELOPER;
+  $DEBUG = (0 && IS_DEVELOPER);
   # source..
   /*
   $cmd_prepare = 'source /home/uchen/py3env/bin/activate'; 
@@ -28,14 +28,30 @@ function get_python_result($uploaded_image_path, $direction){
   }*/
 
   # execute...
-  $cmd = 'source /home/uchen/py3env/bin/activate && /home/uchen/py3env/bin/python3.4 ' . _DIR_ . CALL_PY_FILE . ' image_path='.$uploaded_image_path . ' direction='.$direction;
+  $cmd = '/usr/bin/python3 ' . _DIR_ . CALL_PY_FILE . ' image_path='.$uploaded_image_path . ' direction='.$direction;
   #debug
   if($DEBUG){
     echo$cmd."<br>";
     die('----------debug--------------');
   }else{
     file_put_contents(_DIR_.'_pycmd.log.php', $cmd."\n", FILE_APPEND | LOCK_EX);
-    $output = exec($cmd);
+    echo$cmd;
+    exec($cmd); #execute python!
+    $output = ''; # ready get output for video path
+    $output_txt_path = $uploaded_image_path.'.txt';
+    $TIMEOUT = 2000;#seconds
+    $PER_WAIT = 1;
+    $check_times = $TIMEOUT/$PER_WAIT;
+    echo'<br>'.$check_times;
+    while(!$output && $check_times--){
+      if(file_exists($output_txt_path)){
+        $output = file_get_contents($output_txt_path);
+        $output = str_replace(array("\n", "\r"), '', $output);
+      }
+      if(!$output){
+        sleep($PER_WAIT);
+      }
+    }
     file_put_contents(_DIR_.'_pycmdoutput.log.php', $output."\n\n\n", FILE_APPEND | LOCK_EX);
   }
   return $output;
