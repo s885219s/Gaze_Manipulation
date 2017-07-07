@@ -1,23 +1,37 @@
 <?php
 require_once 'inc.php';
-$ARRAY_VALID_DIR = array('shift', 'scroll');#, 'mouse');
+define('DEFAULT_DIRECTION', 'shift');
+define('UPLOAD_IMAGE_PATH', 'uploads/');
+$ARRAY_VALID_DIR = array(DEFAULT_DIRECTION, 'scroll');#, 'mouse');
 #print_r($_POST); print_r($_FILES);
 
 if(!empty($_POST['dir']) && !empty($_FILES['image']) && $_FILES['image']['error'] == 0) {
     // https://stackoverflow.com/questions/38509334/full-secure-image-upload-script
-    $uploaddir = 'uploads/';
+    $uploaddir = UPLOAD_IMAGE_PATH;
     #print_r($_POST);print_r($_FILES);
 
+    $direction = $_POST['dir'];
+
     /* Generates random filename and extension */
-    function tempnam_sfx($path, $suffix){
+    function tempnam_sfx($path, $suffix, $prefix){
         do {
             if(substr($path, -1)!=='/'){$path.='/';}
-            $file = $path.mt_rand().$suffix;
+            $file = $path.$prefix.'_'.mt_rand().$suffix;
             $fp = @fopen($file, 'x');
         } while(!$fp);
 
         fclose($fp);
         return $file;
+    }
+    function imgfilename_for_python_monitor($direction, $path, $suffix){
+      global$ARRAY_VALID_DIR;
+      if(!in_array($direction, $ARRAY_VALID_DIR)){
+        $direction = DEFAULT_DIRECTION;
+      }
+      return tempnam_sfx($path,$suffix, $direction);
+    }
+    function get_mp4_file_abs_path($uploaded_img_fileabspath){
+      return $uploaded_img_fileabspath.'.mp4'; # <-- After discussed with Python developer
     }
 
     /* Process image with GD library */
@@ -31,15 +45,24 @@ if(!empty($_POST['dir']) && !empty($_FILES['image']) && $_FILES['image']['error'
     }
 
     /* Rename both the image and the extension */
-    $uploadfile = tempnam_sfx($uploaddir, ".img");
+    $uploadfile = imgfilename_for_python_monitor($direction, $uploaddir, ".img");
 
     /* Upload the file to a secure directory with the new name and extension */
     if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile)) {
 
        $abs_uploadfile = __DIR__  . '/' . $uploadfile;
-       $direction = $_POST['dir'];
-       if(!in_array($direction, $ARRAY_VALID_DIR)){die('INVALID dir');}
-       $py_output = get_python_result($abs_uploadfile, $direction);
+       $abs_mp4file = get_mp4_file_abs_path($abs_uploadfile);
+
+       $py_output = '';
+       $MAX_N = 10;
+       while(true){
+          if($py_output or $n>=$MAX_N){break;}
+          if(file_exists($abs_mp4file)){
+            $py_output=$abs_mp4file;
+          }else{
+            sleep(1);
+          }
+       }
 
        #save_local_file($uploadfile);
 
@@ -54,6 +77,7 @@ if(!empty($_POST['dir']) && !empty($_FILES['image']) && $_FILES['image']['error'
 <html>
 <head>
   <meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon" href=favicon.ico />
   <title>Upload Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href=vendors/bootstrap-3.3.7/css/bootstrap.min.css />
@@ -124,9 +148,9 @@ $('#submit-form').submit(function(){
 <div class="panel-heading"><b>Result</b></div>
 <div class="panel-body" style="overflow-x: scroll;">
 <?php
-$GAZE_OUTPUT_PATH = GAZE_PYTHON_OUTPUT_FOLDER . '/';
-list($tmp, $path) = explode($GAZE_OUTPUT_PATH, $py_output);
-$src = WEB_URL . $GAZE_OUTPUT_PATH . $path;
+#$GAZE_OUTPUT_PATH = GAZE_PYTHON_OUTPUT_FOLDER . '/';
+list($tmp, $path) = explode(UPLOAD_IMAGE_PATH, $py_output);
+$src = WEB_URL . UPLOAD_IMAGE_PATH. $path;
 ?>
 <video width="320" autoplay loop controls><source src="<?php echo $src?>" type="video/mp4">Your browser does not support the video tag with MP4.</video>
 <div style=height:30px></div>
