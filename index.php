@@ -1,8 +1,8 @@
 <?php
 require_once 'inc.php';
-define('DEFAULT_DIRECTION', 'shift');
+define('DEFAULT_DIRECTION', 'horizontal');
 define('UPLOAD_IMAGE_PATH', 'uploads/');
-$ARRAY_VALID_DIR = array(DEFAULT_DIRECTION, 'scroll');#, 'mouse');
+$ARRAY_VALID_DIR = array(DEFAULT_DIRECTION, 'vertical', 'circle');#, 'mouse');
 #print_r($_POST); print_r($_FILES);
 
 if(!empty($_POST['dir']) && !empty($_FILES['image']) && $_FILES['image']['error'] == 0) {
