@@ -101,7 +101,7 @@ animation: spin 1s infinite linear;
     to { -webkit-transform: rotate(360deg); }
 }
 #typebox button{text-transform:capitalize}
-@media screen and (max-width: 450px) {
+  
   h1{font-size:24px}
 }
 </style>
@@ -153,7 +153,7 @@ $('#submit-form').submit(function(){
 list($tmp, $path) = explode(UPLOAD_IMAGE_PATH, $py_output);
 $src = UPLOAD_IMAGE_PATH. $path;
 ?>
-<video width="320" autoplay loop controls><source src="<?php echo $src?>" type="video/mp4">Your browser does not support the video tag with MP4.</video>
+<video style="max-width:98%;width:400px;height:400px" autoplay loop controls><source src="<?php echo $src?>" type="video/mp4">Your browser does not support the video tag with MP4.</video>
 <div style=height:30px></div>
 </div><?php #.panel-body?>
 </div><?php #.panel?>
