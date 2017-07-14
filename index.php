@@ -3,7 +3,7 @@ require_once 'inc.php';
 define('DEFAULT_DIRECTION', 'horizontal');
 define('UPLOAD_IMAGE_PATH', 'uploads/');
 $ARRAY_VALID_DIR = array(DEFAULT_DIRECTION, 'vertical', 'circular');#, 'mouse');
-#print_r($_POST); print_r($_FILES);
+#if($_POST or $_FILES){print_r($_POST); print_r($_FILES);exit;}
 
 if(!empty($_POST['dir']) && !empty($_FILES['image']) && $_FILES['image']['error'] == 0) {
     // https://stackoverflow.com/questions/38509334/full-secure-image-upload-script
@@ -11,6 +11,11 @@ if(!empty($_POST['dir']) && !empty($_FILES['image']) && $_FILES['image']['error'
     #print_r($_POST);print_r($_FILES);
 
     $direction = $_POST['dir'];
+
+	$img_ext = '';
+	if(isset($_FILES['image']) and isset($_FILES['image']['type']) and strpos($_FILES['image']['type'], 'image/')!==0){
+		$err_msg = ('Please upload VALID image file.');
+	}else{
 
     /* Generates random filename and extension */
     function tempnam_sfx($path, $suffix, $prefix){
@@ -23,12 +28,12 @@ if(!empty($_POST['dir']) && !empty($_FILES['image']) && $_FILES['image']['error'
         fclose($fp);
         return $file;
     }
-    function imgfilename_for_python_monitor($direction, $path, $suffix){
+    function imgfilename_for_python_monitor($direction, $img_ext, $path, $suffix){
       global$ARRAY_VALID_DIR;
       if(!in_array($direction, $ARRAY_VALID_DIR)){
         $direction = DEFAULT_DIRECTION;
       }
-      return tempnam_sfx($path,$suffix, $direction);
+      return tempnam_sfx($path,$suffix, $direction.'_'.strtolower($img_ext));
     }
     function get_mp4_file_abs_path($uploaded_img_fileabspath){
       return $uploaded_img_fileabspath.'.mp4'; # <-- After discussed with Python developer
@@ -45,7 +50,9 @@ if(!empty($_POST['dir']) && !empty($_FILES['image']) && $_FILES['image']['error'
     }
 
     /* Rename both the image and the extension */
-    $uploadfile = imgfilename_for_python_monitor($direction, $uploaddir, ".img");
+    $ary_img_name_split = explode('.', $_FILES['image']['name']);
+    $img_ext = $ary_img_name_split[count($ary_img_name_split)-1];
+    $uploadfile = imgfilename_for_python_monitor($direction, $img_ext, $uploaddir, ".img");
 
     /* Upload the file to a secure directory with the new name and extension */
     if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile)) {
@@ -70,8 +77,10 @@ if(!empty($_POST['dir']) && !empty($_FILES['image']) && $_FILES['image']['error'
        #db_save($uploadfile); 
        
     } else {
-        die("Image upload failed!");
+        $err_msg = ("Image upload failed!");
     }
+
+	}//end of $err_msg 'Please upload VALID image file
 }
 ?>
 <!DOCTYPE html>
@@ -119,6 +128,11 @@ animation: spin 1s infinite linear;
 <li>Minimum image dimensions <i>(after resize)</i>: <tt>200x25px</tt>.</li>
 */?>
 </ul>
+<?php if(isset($err_msg) and $err_msg){
+echo '<div class="alert alert-danger">
+  <strong>Error!</strong> '.$err_msg.strpos($_FILES['image']['type'], 'image/').'
+</div>';
+	}?>
 <form id="submit-form" class="form-inline" method="post" enctype="multipart/form-data">
 <div class="form-group" style="margin:0;padding:0">
 <div class="input-group">
