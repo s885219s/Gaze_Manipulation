@@ -153,7 +153,7 @@ $('#submit-form').submit(function(){
 list($tmp, $path) = explode(UPLOAD_IMAGE_PATH, $py_output);
 $src = UPLOAD_IMAGE_PATH. $path;
 ?>
-<video style="max-width:98%;width:400px;height:400px" autoplay loop controls><source src="<?php echo $src?>" type="video/mp4">Your browser does not support the video tag with MP4.</video>
+<video style="max-width:98%;width:500px;height:500px" autoplay loop controls><source src="<?php echo $src?>" type="video/mp4">Your browser does not support the video tag with MP4.</video>
 <div style=height:30px></div>
 </div><?php #.panel-body?>
 </div><?php #.panel?>
