@@ -166,6 +166,10 @@ $('#submit-form').submit(function(){
 #$GAZE_OUTPUT_PATH = GAZE_PYTHON_OUTPUT_FOLDER . '/';
 list($tmp, $path) = explode(UPLOAD_IMAGE_PATH, $py_output);
 $src = UPLOAD_IMAGE_PATH. $path;
+
+if(0){ // still cannot fix android & iOS
+  $src = 'data:video/mp4;base64,' . base64_encode(file_get_contents($py_output));
+}
 ?>
 <video style="max-width:98%;width:500px;height:500px" autoplay loop controls><source src="<?php echo $src?>" type="video/mp4">Your browser does not support the video tag with MP4.</video>
 <div style=height:30px></div>
