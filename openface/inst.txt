@@ -1,0 +1,1 @@
+FaceLandmarkImg.exe -f test/zombie.jpg -of test/zombie_output.txt -op test/zombie_output_3D.txt -gaze -oi test/zombie_landmark.jpg

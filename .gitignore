@@ -8,7 +8,9 @@ pyoutput
 bg.jpg
 2.png
 *.ipynb
-
+*.png
+*.jpg
+*.img
 *.zip
 _pycmd.log.php
 mp4.html
