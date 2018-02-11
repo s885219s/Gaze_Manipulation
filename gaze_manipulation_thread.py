@@ -154,7 +154,7 @@ def load_model(e,q):
 
 def get_feature_points(img_path):
     print('get feature points')
-    eyes_params = subprocess.check_output(['openface/Release/FaceLandmarkImg.exe', '-f', img_path, '-gaze'], universal_newlines=True)
+    eyes_params = subprocess.check_output(['./openface/bin/FaceLandmarkImg', '-f', img_path, '-gaze'], universal_newlines=True)
     eyes_params = shlex.split(eyes_params)
     # print(eyes_params)
 

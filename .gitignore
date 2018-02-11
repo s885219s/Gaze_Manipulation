@@ -17,3 +17,4 @@ mp4.html
 *.swp
 _pycmdoutput.log.php
 uploads/*
+.gitignore
